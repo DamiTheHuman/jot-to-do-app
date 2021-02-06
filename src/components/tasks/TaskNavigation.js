@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const TaskNavigation = () => {
   return (
     <div className="task-navigation w-32">
-      <div className="text-white h-screen border-r border-tertiary bg-quaternary fixed w-32">
+      <div className="text-white h-screen border-r border-black bg-quaternary fixed w-32 z-neg-10">
         <div className="task-navigation-list mt-8">
           <a href="/#">
             <p className="text-left">

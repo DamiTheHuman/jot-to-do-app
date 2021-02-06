@@ -1,9 +1,10 @@
 import React from "react";
 /** Simple reusable button */
-const SimpleButton = ({ background, content, extraStyle }) => {
+const SimpleButton = ({ background, content, extraStyle, onClick }) => {
   return (
     <button
       className={`${background} ${extraStyle} rounded-sm shadow text-white p-1.5 block`}
+      onClick={onClick}
     >
       {content}
     </button>

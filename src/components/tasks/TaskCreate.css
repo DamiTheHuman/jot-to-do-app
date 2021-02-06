@@ -1,0 +1,16 @@
+.task-create .progress-bar-item::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  z-index: -1;
+  left: 100%;
+  top: 50%;
+  transform: translate(-45%, -50%);
+}
+.task-create .progress-bar-item.active::after {
+  background-color: #007aff;
+}
+.task-create .progress-bar-item::after {
+  background-color: #6c757d;
+}

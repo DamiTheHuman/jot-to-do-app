@@ -20,7 +20,7 @@ const App = () => {
               <div className="flex-none">
                 <TaskNavigation />
               </div>
-              <div className="main mt-8 pr-8 flex-grow">
+              <div className="main mt-8 mb-8 pr-8 flex-grow">
                 <Route path="/tasks" exact component={TaskList} />
                 <Route path="/tasks/create" exact component={TaskCreate} />
                 <Route path="/tasks/delete" exact component={TaskDelete} />

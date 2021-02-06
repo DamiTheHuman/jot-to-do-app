@@ -1,7 +1,7 @@
 import React from "react";
 import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import SimpleButton from "../SimpleButton";
+import SimpleButton from "../general/SimpleButton";
 const TaskList = () => {
   const tasks = [
     {
