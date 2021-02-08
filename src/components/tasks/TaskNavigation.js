@@ -1,22 +1,40 @@
 import React from "react";
-import { faCalendar } from "@fortawesome/free-solid-svg-icons";
+import {
+  faInbox,
+  faCalendarAlt,
+  faCalendarDay,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from "react-router-dom";
 /*Side navigation for task related activities and lists */
 const TaskNavigation = () => {
   return (
-    <div className="task-navigation w-32">
-      <div className="text-white h-screen border-r border-black bg-quaternary fixed w-32 z-neg-10">
-        <div className="task-navigation-list mt-8">
-          <a href="/#">
-            <p className="text-left">
-              <span className="mx-4">
-                <FontAwesomeIcon icon={faCalendar} />
-              </span>
-              Tasks
-            </p>
-          </a>
-        </div>
-      </div>
+    <div className="task-navigation px-2 mt-4 space-y-4">
+      <li className="active">
+        <Link to="/tasks/inbox">
+          <span className="mx-4">
+            <FontAwesomeIcon icon={faInbox} />
+          </span>
+          Inbox
+        </Link>
+      </li>
+      <li>
+        <Link to="/tasks/today">
+          <span className="mx-4">
+            <FontAwesomeIcon icon={faCalendarDay} />
+          </span>
+          Today
+        </Link>
+      </li>
+      <li>
+        <Link to="/tasks/upcoming">
+          <span className="mx-4">
+            <FontAwesomeIcon icon={faCalendarAlt} />
+          </span>
+          Upcoming
+        </Link>
+      </li>
+      <hr />
     </div>
   );
 };

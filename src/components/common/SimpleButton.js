@@ -3,7 +3,7 @@ import React from "react";
 const SimpleButton = ({ background, content, extraStyle, onClick }) => {
   return (
     <button
-      className={`${background} ${extraStyle} rounded-sm shadow text-white p-1.5 block`}
+      className={`${background} ${extraStyle} rounded-sm shadow text-white p-1.5 px-3 block`}
       onClick={onClick}
     >
       {content}

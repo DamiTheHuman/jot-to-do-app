@@ -14,7 +14,7 @@ const Welcome = () => {
           <p className="text-lg">A To-do app alternative</p>
         </div>
         <div className="w-100">
-          <Link to="./tasks">
+          <Link to="./tasks/inbox">
             <button className="bg-primary hover:bg-secondary rounded-md text-white p-2 mx-auto block px-8">
               Try The Demo
             </button>

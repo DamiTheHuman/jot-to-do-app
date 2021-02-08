@@ -9,7 +9,7 @@ module.exports = {
       current: "currentColor",
       primary: "#005dff",
       secondary: "#007aff",
-      tertiary: "#c5c6c7",
+      tertiary: "#fafafa",
       quaternary: "#1f2833",
       quinary: "#0b0c10",
       success: "#22bb33",

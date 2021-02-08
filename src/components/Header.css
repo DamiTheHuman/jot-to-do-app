@@ -16,3 +16,10 @@
 .z-neg-10 {
   z-index: -10;
 }
+
+.sidenav {
+  height: calc(100vh - 3.5rem);
+}
+.content-wrapper {
+  margin-left: 230px;
+}
