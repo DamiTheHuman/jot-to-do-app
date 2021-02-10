@@ -9,33 +9,71 @@ import TaskList from "./TaskList";
 class TaskInbox extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { formValues: [], title: this.getPathTitle(), taskStatus: [] };
+    this.state = {
+      formValues: [],
+      title: this.getPathTitle(this.props),
+      getRequest: "",
+      taskStatus: [],
+    };
+  }
+  componentDidUpdate(prevProps) {
+    if (this.props.location !== prevProps.location) {
+      // fetch or other component tasks necessary for rendering
+      this.setState(
+        {
+          title: this.getPathTitle(this.props),
+        },
+        () => {
+          this.getTasks();
+        }
+      );
+    }
   }
   componentDidMount() {
-    this.getTasks();
+    this.setState(
+      {
+        title: this.getPathTitle(this.props),
+      },
+      () => {
+        this.getTasks();
+      }
+    );
   }
   /**
-   * Gets the a list of tasks depending on the current page title
+   * Gets the a list of tasks depending on the current page title and get request
    */
   getTasks = () => {
+    if (this.props.location.search) {
+      const searchRequest = this.props.location.search.split("?")[1].split("=");
+      const type = searchRequest[0];
+      const value = searchRequest[1];
+      if (type === "priority") {
+        this.setState({
+          getRequest: { key: type, value: value },
+        });
+        this.props.fetchTasks({ type: "all", priority: parseInt(value) });
+        return;
+      }
+    }
     switch (this.state.title) {
       case "upcoming":
-        this.props.fetchTasks("upcoming");
+        this.props.fetchTasks({ type: "upcoming" });
         break;
       case "today":
-        this.props.fetchTasks("today");
+        this.props.fetchTasks({ type: "today" });
         break;
       default:
-        this.props.fetchTasks();
+        this.props.fetchTasks({ type: "all" });
         break;
     }
   };
 
   /**
    * Gets the title to be displayed based on the path
+   * @props the current props of the page
    */
-  getPathTitle = () => {
-    const location = this.props.location.pathname.split("/");
+  getPathTitle = (props) => {
+    const location = props.location.pathname.split("/");
     return location[location.length - 1];
   };
   /**
@@ -43,6 +81,11 @@ class TaskInbox extends React.Component {
    * @task the task to be added
    */
   addTask = (task) => {
+    if (this.state.getRequest) {
+      if (this.state.getRequest.key === "priority") {
+        task.priority = parseInt(this.state.getRequest.value);
+      }
+    }
     this.props.createTask(task);
     this.cancelTaskInput(task.id);
   };
@@ -69,29 +112,40 @@ class TaskInbox extends React.Component {
    */
   onEditSubmit = (task, newTaskData) => {
     //Remove the old task from taskStatus to end editing
-    this.setState({
-      taskStatus: this.state.taskStatus.filter(
-        (oldTask) => oldTask === task.id
-      ),
-    });
+    this.onEditCancel(task);
     task = { ...task, ...newTaskData }; //Merge the task data
     this.props.updateTask(task);
     this.getTasks();
   };
   /**
+   * Removes the currently task being edited
+   * @task the task being edited
+   */
+  onEditCancel = (task) => {
+    //Remove the old task from taskStatus to end editing
+    this.setState({
+      taskStatus: this.state.taskStatus.filter(
+        (oldTask) => oldTask === task.id
+      ),
+    });
+  };
+
+  /**
    * Creates a task input field for the user to add a task
    */
   createTaskInput = () => {
     var taskId = this.state.formValues.length;
-    Date.prototype.toDateInputValue = function () {
-      var local = new Date(this);
-      local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+
+    const toDateInputValue = function (date) {
+      var local = new Date(date);
+      local.setMinutes(date.getMinutes() - date.getTimezoneOffset());
       return local.toJSON().slice(0, 10);
     };
+
     this.setState({
       formValues: [
         ...this.state.formValues,
-        { id: taskId, task: "", dueDate: new Date().toDateInputValue() },
+        { id: taskId, task: "", dueDate: toDateInputValue(new Date()) },
       ],
     });
   };
@@ -198,6 +252,7 @@ class TaskInbox extends React.Component {
           deleteTask={this.deleteTask}
           editTask={this.editTask}
           onEditSubmit={this.onEditSubmit}
+          onEditCancel={this.onEditCancel}
         />
         {renderInputForms}
         <SimpleButton

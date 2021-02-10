@@ -4,6 +4,7 @@ import {
   saveTask,
   removeTask,
   amendTask,
+  getPriorityData,
 } from "../api/tasksAPI";
 
 /**
@@ -11,9 +12,10 @@ import {
  * @term the type of tasks to be fetches
  */
 export const fetchTasks = (term) => async (dispatch) => {
-  var response;
+  var response = [];
   const allTasks = getTasks();
-  switch (term) {
+  //Filter by type first
+  switch (term.type) {
     case "today":
       response = allTasks.filter(
         (task) =>
@@ -31,6 +33,12 @@ export const fetchTasks = (term) => async (dispatch) => {
       response = allTasks;
       break;
   }
+  //Filter by priority
+  if (term.priority) {
+    response = response.filter(
+      (task) => task.priority === term.priority && term.priority
+    );
+  }
   dispatch({ type: "GET_TASKS", payload: response });
 };
 /**
@@ -39,6 +47,10 @@ export const fetchTasks = (term) => async (dispatch) => {
  */
 export const createTask = (task) => async (dispatch) => {
   task.id = getNewTaskId();
+
+  if (!task.priority) {
+    task.priority = getPriorityData()[getPriorityData().length - 1].value; //default lowest priority
+  }
   saveTask(task);
   dispatch({ type: "CREATE_TASK", payload: task });
 };

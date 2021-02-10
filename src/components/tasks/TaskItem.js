@@ -3,12 +3,32 @@ import {
   faComment,
   faEllipsisH,
   faAngleDoubleUp,
+  faFlag,
+  faFlagCheckered,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { getPriorityData } from "../../api/tasksAPI";
 import SimpleButton from "../common/SimpleButton";
-const TaskItem = ({ task, deleteTask, editTask, onEditSubmit, editing }) => {
+const TaskItem = ({
+  task,
+  deleteTask,
+  editTask,
+  onEditSubmit,
+  onEditCancel,
+  editing,
+}) => {
   const [taskValue, setTaskValue] = useState(task.task);
   const [taskDueDate, setTaskDueDate] = useState(task.dueDate);
+  const [taskPriority, setTaskPriority] = useState(task.priority);
+
+  const onFormSubmit = () => {
+    onEditSubmit(task, {
+      task: taskValue,
+      dueDate: taskDueDate,
+      priority: taskPriority,
+    });
+  };
+
   /**Shows whether to display the task action for each item*/
   const [taskAction, setTaskAction] = useState(false);
   /**
@@ -21,6 +41,7 @@ const TaskItem = ({ task, deleteTask, editTask, onEditSubmit, editing }) => {
         <div className="w-100 justify-end flex">
           <ul className="options w-max text-xs bg-tertiary border rounded-sm justify-end px-4 py-2 flex space-x-2">
             <li
+              className="cursor-pointer"
               onClick={() => {
                 editTask(task);
               }}
@@ -28,6 +49,7 @@ const TaskItem = ({ task, deleteTask, editTask, onEditSubmit, editing }) => {
               Edit
             </li>
             <li
+              className="cursor-pointer"
               onClick={() => {
                 deleteTask(task);
               }}
@@ -35,6 +57,7 @@ const TaskItem = ({ task, deleteTask, editTask, onEditSubmit, editing }) => {
               Delete
             </li>
             <li
+              className="cursor-pointer"
               onClick={() => {
                 setTaskAction(false);
               }}
@@ -48,6 +71,21 @@ const TaskItem = ({ task, deleteTask, editTask, onEditSubmit, editing }) => {
       return null;
     }
   };
+  const renderTaskPriority = getPriorityData().map((priority) => {
+    return (
+      <li
+        className={`cursor-pointer ${priority.color}`}
+        key={priority.value}
+        onClick={() => {
+          setTaskPriority(priority.value);
+        }}
+      >
+        <FontAwesomeIcon
+          icon={taskPriority === priority.value ? faFlagCheckered : faFlag}
+        />
+      </li>
+    );
+  });
   /* The task is currently being edited*/
   if (editing) {
     return (
@@ -55,7 +93,7 @@ const TaskItem = ({ task, deleteTask, editTask, onEditSubmit, editing }) => {
         className="mb-2"
         onSubmit={(event) => {
           event.preventDefault();
-          onEditSubmit(task, { task: taskValue, dueDate: taskDueDate });
+          onFormSubmit();
         }}
       >
         <div className="flex">
@@ -76,23 +114,43 @@ const TaskItem = ({ task, deleteTask, editTask, onEditSubmit, editing }) => {
             }}
           />
         </div>
-        <SimpleButton
-          content={<p>Save</p>}
-          background="bg-success"
-          onClick={() => {
-            onEditSubmit(task, { task: taskValue, dueDate: taskDueDate });
-          }}
-        />
+        <div className="flex w-100 justify-between">
+          <div className="flex space-x-2">
+            <SimpleButton
+              content={<p>Save</p>}
+              background="bg-success"
+              onClick={() => {
+                onFormSubmit();
+              }}
+            />
+            <SimpleButton
+              content={<p>Cancel</p>}
+              background="bg-danger"
+              onClick={() => {
+                onEditCancel(task);
+                setTaskValue(task.task);
+                setTaskDueDate(task.dueDate);
+              }}
+            />
+          </div>
+          <div>
+            <ul className="options w-max text-xs bg-tertiary border rounded-sm justify-end px-4 py-2 flex space-x-2">
+              <span>Priority: </span>
+
+              {renderTaskPriority}
+            </ul>
+          </div>
+        </div>
         <hr className="my-2" />
       </form>
     );
   }
   return (
-    <div>
-      <div className="flex items-center mb-2">
+    <React.Fragment>
+      <div className="height-transition flex items-center mb-2">
         <div className="w-1/12">
           <input
-            className="rounded-full"
+            className="curser-pointer"
             type="checkbox"
             id="completed"
             name="completed"
@@ -100,7 +158,7 @@ const TaskItem = ({ task, deleteTask, editTask, onEditSubmit, editing }) => {
           />
         </div>
         <div
-          className="flex-grow"
+          className="flex-grow cursor-pointer"
           onClick={() => {
             editTask(task);
           }}
@@ -115,6 +173,7 @@ const TaskItem = ({ task, deleteTask, editTask, onEditSubmit, editing }) => {
             {task.dueDate}
             <span className="ml-2 relative">
               <FontAwesomeIcon
+                className="cursor-pointer"
                 icon={faEllipsisH}
                 onClick={() => {
                   setTaskAction(!taskAction);
@@ -126,7 +185,7 @@ const TaskItem = ({ task, deleteTask, editTask, onEditSubmit, editing }) => {
         </div>
       </div>
       <hr />
-    </div>
+    </React.Fragment>
   );
 };
 

@@ -23,9 +23,7 @@ const App = () => {
           />
           <Route path="/tasks">
             <div className=" ml-60 mb-8 mt-4 pr-8 flex-grow">
-              <Route path="/tasks/inbox" exact component={TaskInbox}></Route>
-              <Route path="/tasks/today" exact component={TaskInbox} />
-              <Route path="/tasks/upcoming" exact component={TaskInbox} />
+              <Route path="/tasks/" component={TaskInbox}></Route>
             </div>
           </Route>
           <Route path="/" exact component={Welcome} />

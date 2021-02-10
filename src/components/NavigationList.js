@@ -7,10 +7,14 @@ const NavigationList = ({ links }) => {
   const renderLinks = links.map((link) => {
     if (!link.children) {
       return (
-        <div key={link.label} className="my-auto opacity-70 hover:opacity-100">
-          <li className="inline-block py-2 mr-4">
+        <div
+          key={link.label}
+          className="nav-link relative my-auto py-4 z-10 hover:bg-hover text-white"
+        >
+          <li className="inline-block mx-4">
             <Link to={link.to}>{link.label}</Link>
           </li>
+          <span className="divider bg-quinary" />
         </div>
       );
     } else {
@@ -37,7 +41,7 @@ const NavigationList = ({ links }) => {
                 <FontAwesomeIcon icon={faCaretDown} />
               </span>
             </button>
-            <div className="dropdown-content  min-w-max	w-full px-4 absolute rounded-sm shadow-sm bg-primary">
+            <div className="dropdown-content min-w-max w-full px-4 absolute rounded-sm shadow-sm bg-primary">
               {renderLinkChildren}
             </div>
           </li>

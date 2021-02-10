@@ -16,6 +16,7 @@ module.exports = {
       warning: "#ffc107",
       danger: "#dc3545",
       muted: "#6c757d",
+      hover: "rgba(255, 255, 255, 0.1)",
       black: colors.black,
       white: colors.white,
       gray: colors.trueGray,

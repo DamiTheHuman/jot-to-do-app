@@ -23,3 +23,32 @@
 .content-wrapper {
   margin-left: 230px;
 }
+
+.header .nav-link:after {
+  content: "";
+  display: none;
+}
+
+.header .nav-link:hover .divider:after {
+  content: "";
+  position: absolute;
+  margin: auto;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: inherit;
+}
+
+.header .task-navigation .nav-link:hover .divider:after {
+  content: "";
+  position: absolute;
+  margin: auto;
+  right: 0;
+  bottom: 0;
+  left: 100%;
+  width: 2px;
+  height: 100%;
+  background: inherit;
+}

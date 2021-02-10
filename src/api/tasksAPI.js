@@ -41,5 +41,16 @@ export const amendTask = (newTaskDetails) => {
  * Gets a new task id for newly added
  */
 export const getNewTaskId = () => {
-  return getTasks().length == 0 ? 0 : getTasks()[getTasks().length - 1].id + 1;
+  return getTasks().length === 0 ? 0 : getTasks()[getTasks().length - 1].id + 1;
+};
+/**
+ * Gets the possible priority data for the tasks
+ */
+export const getPriorityData = () => {
+  return [
+    { value: 1, color: "text-danger" },
+    { value: 2, color: "text-success" },
+    { value: 3, color: "text-warning" },
+    { value: 4, color: "text-muted" },
+  ];
 };

@@ -7,6 +7,7 @@ const TaskList = ({
   editTask,
   taskStatus,
   onEditSubmit,
+  onEditCancel,
 }) => {
   if (!tasks) {
     return (
@@ -21,6 +22,7 @@ const TaskList = ({
           deleteTask={deleteTask}
           editTask={editTask}
           onEditSubmit={onEditSubmit}
+          onEditCancel={onEditCancel}
           editing={taskStatus.includes(task)}
         />
       </div>
