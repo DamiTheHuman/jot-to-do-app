@@ -18,7 +18,7 @@ const Header = (props) => {
   if (props.location.pathname === "/") {
     return (
       <div className="header">
-        <nav className="flex flex-wrap align-center bg-white fixed top-0 right-0 left-0 text-white ">
+        <nav className="flex flex-wrap align-center border-b bg-primary fixed top-0 right-0 left-0 text-white">
           <NavigationList links={links} />
         </nav>
       </div>
