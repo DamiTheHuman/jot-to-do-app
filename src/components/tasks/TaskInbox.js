@@ -22,6 +22,7 @@ class TaskInbox extends React.Component {
       this.setState(
         {
           title: this.getPathTitle(this.props),
+          formValues: [],
         },
         () => {
           this.getTasks();
@@ -74,6 +75,14 @@ class TaskInbox extends React.Component {
    */
   getPathTitle = (props) => {
     const location = props.location.pathname.split("/");
+    if (this.props.location.search) {
+      const searchRequest = this.props.location.search.split("?")[1].split("=");
+      const type = searchRequest[0];
+      const value = searchRequest[1];
+      if (type) {
+        return type + " " + value + " " + location[location.length - 1];
+      }
+    }
     return location[location.length - 1];
   };
   /**

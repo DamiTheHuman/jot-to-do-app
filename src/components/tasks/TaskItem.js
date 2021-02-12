@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import {
-  faComment,
   faEllipsisH,
   faAngleDoubleUp,
   faFlag,
@@ -74,7 +73,7 @@ const TaskItem = ({
   const renderTaskPriority = getPriorityData().map((priority) => {
     return (
       <li
-        className={`cursor-pointer ${priority.color}`}
+        className={`cursor-pointer ${priority.color} transform hover:scale-125`}
         key={priority.value}
         onClick={() => {
           setTaskPriority(priority.value);
@@ -99,7 +98,7 @@ const TaskItem = ({
         <div className="flex">
           <input
             type="input"
-            className="w-3/4 block placeholder-gray-500 border rounded-sm py-2 px-4 text-gray-700 mb-2 left-input"
+            className="flex-grow block placeholder-gray-500 border rounded-sm py-2 px-4 text-gray-700 mb-2 left-input"
             value={taskValue}
             onChange={(event) => {
               setTaskValue(event.target.value);
@@ -107,15 +106,15 @@ const TaskItem = ({
           />
           <input
             type="date"
-            className="w-1/4 block placeholder-gray-500 border rounded-sm py-2 px-4 text-gray-700 mb-2 right-input text-xs"
+            className="block placeholder-gray-500 border rounded-sm py-2 px-4 text-gray-700 mb-2 right-input text-xs"
             value={taskDueDate}
             onChange={(event) => {
               setTaskDueDate(event.target.value);
             }}
           />
         </div>
-        <div className="flex w-100 justify-between">
-          <div className="flex space-x-2">
+        <div className="flex flex-wrap w-100 justify-between items-center">
+          <div className="flex h-full space-x-2 mb-2">
             <SimpleButton
               content={<p>Save</p>}
               background="bg-success"
@@ -133,10 +132,10 @@ const TaskItem = ({
               }}
             />
           </div>
-          <div>
-            <ul className="options w-max text-xs bg-tertiary border rounded-sm justify-end px-4 py-2 flex space-x-2">
-              <span>Priority: </span>
-
+          <div className="border rounded-sm px-4 bg-tertiary">
+            <span className="text-xs">Priority: </span>
+            <br />
+            <ul className="options w-max text-xs justify-end py-2 flex space-x-4">
               {renderTaskPriority}
             </ul>
           </div>
@@ -158,22 +157,18 @@ const TaskItem = ({
           />
         </div>
         <div
-          className="flex-grow cursor-pointer"
+          className="flex-grow cursor-pointer text-xs sm:text-md"
           onClick={() => {
             editTask(task);
           }}
         >
           {task.task}
-          <span className="ml-2">
-            <FontAwesomeIcon className="text-muted" icon={faComment} />
-          </span>
         </div>
         <div className="w-4/12 text-right text-muted">
-          <p className="text-sm">
+          <p className="text-xs sm:text-sm">
             {task.dueDate}
-            <span className="ml-2 relative">
+            <span className="ml-2 cursor-pointer">
               <FontAwesomeIcon
-                className="cursor-pointer"
                 icon={faEllipsisH}
                 onClick={() => {
                   setTaskAction(!taskAction);

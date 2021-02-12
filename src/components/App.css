@@ -23,3 +23,14 @@ body {
 .right-input {
   border-left: none !important;
 }
+
+.fit-content {
+  height: fit-content;
+}
+/** Mobile or SM Styles **/
+@media only screen and (max-width: 640px) {
+  body {
+    padding-top: 0;
+    margin-bottom: 0;
+  }
+}

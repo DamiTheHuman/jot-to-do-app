@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 import "./App.css";
 import Welcome from "./Welcome";
-import Header from "./Header";
+import Navigation from "./navigation/Navigation";
 import TaskInbox from "./tasks/TaskInbox";
 import Modal from "./common/Modal";
 
@@ -14,15 +14,15 @@ const App = () => {
   return (
     <div className="App">
       <BrowserRouter>
-        <div>
-          <Route path="/" component={Header} />
+        <div className=" relative z-10">
+          <Route path="/" component={Navigation} />
           <Modal
             content={modalContent}
             showModal={showModal}
             setShowModal={setShowModal}
           />
           <Route path="/tasks">
-            <div className=" ml-60 mb-8 mt-4 pr-8 flex-grow">
+            <div className="relative z-neg10 sm:ml-52 px-4 md:px-8 mb-8 mt-4 flex-grow">
               <Route path="/tasks/" component={TaskInbox}></Route>
             </div>
           </Route>
