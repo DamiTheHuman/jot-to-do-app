@@ -12,7 +12,7 @@ const MainNavigation = ({ renderSideBar, showSideBar, links }) => {
         <ul
           className={`${
             showSideBar ? "left-0" : "-left-full sm:left-0"
-          } task-navigation transition-all ease-linear duration-300 flex flex-col pl-0 mb-0 mr-auto sm:w-52 w-full sidenav absolute top-0 sm:mt-14 bg-tertiary border-r text-black`}
+          } task-navigation transition-all ease-linear duration-200 flex flex-col pl-0 mb-0 mr-auto sm:w-52 w-full sidenav absolute top-0 sm:mt-14 bg-tertiary border-r text-black`}
         >
           <TaskNavigationList />
         </ul>
