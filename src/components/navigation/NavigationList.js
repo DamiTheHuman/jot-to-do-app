@@ -9,7 +9,7 @@ const NavigationList = ({ links }) => {
       return (
         <div
           key={link.label}
-          className="nav-link relative my-auto py-4 z-10 hover:bg-hover text-white"
+          className="nav-link relative my-auto h-full py-4 z-10 hover:bg-hover text-white"
         >
           <li className={`inline-block mx-4 ${link.style}`}>
             <Link to={link.to}>{link.label}</Link>

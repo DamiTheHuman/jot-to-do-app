@@ -12,12 +12,12 @@
 #logo path:nth-child(2) {
   stroke-dasharray: 203px;
   stroke-dashoffset: 203px;
-  animation: line-anim 1.5s ease forwards 2s;
+  animation: line-anim 1.5s ease forwards 1.5s;
 }
 #logo path:nth-child(3) {
   stroke-dasharray: 124px;
   stroke-dashoffset: 124px;
-  animation: line-anim 1.5s ease forwards 3s;
+  animation: line-anim 1.5s ease forwards 2.35s;
 }
 
 @keyframes line-anim {

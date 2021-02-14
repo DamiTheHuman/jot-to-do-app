@@ -21,8 +21,8 @@ const MainNavigation = ({ renderSideBar, showSideBar, links }) => {
   };
   return (
     <header className="flex flex-wrap fixed top-0 right-0 left-0">
-      <div className="links hidden sm:block">
-        <nav className="flex flex-wrap align-center border-b bg-primary fixed top-0 right-0 left-0 text-white">
+      <div className="links hidden sm:block w-full">
+        <nav className="flex flex-wrap align-center inverted-border-b relative w-full bg-primary fixed top-0 right-0 left-0 text-white">
           <NavigationList links={links} />
         </nav>
       </div>

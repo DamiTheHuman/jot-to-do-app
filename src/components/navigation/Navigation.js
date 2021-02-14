@@ -26,11 +26,12 @@ class Navigation extends React.Component {
     const links = [
       {
         label: "Jot",
-        style: "font-allura text-2xl",
+        style: "font-allura text-xl",
         to: "/",
       },
       {
         label: "Tasks",
+        style: "py-1",
         to: "/tasks/inbox",
       },
     ];
