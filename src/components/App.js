@@ -35,14 +35,14 @@ const App = () => {
       <BrowserRouter>
         <div className=" relative z-10">
           <Route path="/" component={Navigation} />
-          <Modal
-            content={modalContent()}
-            showModal={showModal}
-            noClose
-            title="Demo Notice"
-            setShowModal={setShowModal}
-          />
           <Route path="/tasks">
+            <Modal
+              content={modalContent()}
+              showModal={showModal}
+              noClose
+              title="Demo Notice"
+              setShowModal={setShowModal}
+            />
             <div className="relative z-neg10 sm:ml-52 px-4 md:px-8 mb-8 mt-4 flex-grow">
               <Route path="/tasks/" component={TaskInbox}></Route>
             </div>
