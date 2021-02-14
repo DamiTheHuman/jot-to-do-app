@@ -11,7 +11,7 @@ const NavigationList = ({ links }) => {
           key={link.label}
           className="nav-link relative my-auto py-4 z-10 hover:bg-hover text-white"
         >
-          <li className="inline-block mx-4">
+          <li className={`inline-block mx-4 ${link.style}`}>
             <Link to={link.to}>{link.label}</Link>
           </li>
           <span className="divider bg-quinary" />

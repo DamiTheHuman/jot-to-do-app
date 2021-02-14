@@ -39,6 +39,7 @@ module.exports = {
       100: 100,
       auto: "auto",
     },
+    fontFamily: { allura: ["allura", "Arial", "sans-serif"] },
   },
   variants: {
     extend: {},

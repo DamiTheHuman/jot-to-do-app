@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 import "./App.css";
+import {
+  getLocalStorageStatus,
+  saveLocalStorageStatus,
+} from "../api/localStorageStatusApi";
+import AcceptCookies from "./common/AcceptCookies";
+import SimpleButton from "./common/SimpleButton";
 import Welcome from "./Welcome";
 import Navigation from "./navigation/Navigation";
 import TaskInbox from "./tasks/TaskInbox";
@@ -8,17 +14,32 @@ import Modal from "./common/Modal";
 
 const App = () => {
   /** The current state of the modal */
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(!getLocalStorageStatus());
   /** Sets the modal content */
-  const modalContent = "";
+  const modalContent = () => {
+    return (
+      <div>
+        <AcceptCookies />
+        <SimpleButton
+          content="Continue"
+          onClick={() => {
+            saveLocalStorageStatus();
+            setShowModal(false);
+          }}
+        />
+      </div>
+    );
+  };
   return (
     <div className="App">
       <BrowserRouter>
         <div className=" relative z-10">
           <Route path="/" component={Navigation} />
           <Modal
-            content={modalContent}
+            content={modalContent()}
             showModal={showModal}
+            noClose
+            title="Demo Notice"
             setShowModal={setShowModal}
           />
           <Route path="/tasks">

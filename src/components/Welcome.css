@@ -13,25 +13,3 @@ body {
   -o-background-size: cover;
   background-size: cover;
 }
-
-.anim-text {
-  animation-name: skew-in;
-  animation-duration: 3s;
-  animation-iteration-count: 3;
-  animation-fill-mode: forwards;
-  font-style: italic;
-  text-decoration: underline;
-}
-@keyframes skew-in {
-  0% {
-    text-decoration: underline;
-  }
-
-  50% {
-    text-decoration: none;
-  }
-
-  100% {
-    text-decoration: none;
-  }
-}

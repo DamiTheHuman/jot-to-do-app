@@ -9,9 +9,11 @@ const TaskList = ({
   onEditSubmit,
   onEditCancel,
 }) => {
-  if (!tasks) {
+  if (!tasks || tasks.length === 0) {
     return (
-      <div className="task-list mb-4">You currently have no tasks due</div>
+      <div className="task-list mb-4">
+        You currently have no tasks in this category
+      </div>
     );
   }
   const renderTaskList = tasks.map((task) => {
