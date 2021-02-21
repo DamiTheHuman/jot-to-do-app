@@ -1,9 +1,10 @@
-const colors = require("tailwindcss/colors");
 module.exports = {
   purge: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
+    fontFamily: {
+      exo: ["Exo", "Arial", "sans-serif"],
+    },
     colors: {
       transparent: "transparent",
       current: "currentColor",
@@ -39,7 +40,6 @@ module.exports = {
       100: 100,
       auto: "auto",
     },
-    fontFamily: { allura: ["allura", "Arial", "sans-serif"] },
   },
   variants: {
     extend: {},

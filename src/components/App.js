@@ -47,7 +47,9 @@ const App = () => {
               <Route path="/tasks/" component={TaskInbox}></Route>
             </div>
           </Route>
-          <Route path="/" exact component={Welcome} />
+          <div className="mt-2">
+            <Route path="/" exact component={Welcome} />
+          </div>
         </div>
       </BrowserRouter>
     </div>
